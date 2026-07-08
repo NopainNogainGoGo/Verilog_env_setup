@@ -16,7 +16,7 @@
 ## Downlaod from GitHub
 Check first:  
 git --version  
-git clone https://github.com/thename.git
+git clone https網址.git
 
 ## Upload to GitHub
 use github_upload.sh 
