@@ -12,6 +12,7 @@
 ├── Makefile            # 自動化編譯與模擬腳本 (vcs)
 |── github_upload.sh    # Git 自動上傳到 github 用 git 管理
 ```
+<img width="353" height="420" alt="image" src="https://github.com/user-attachments/assets/a2a2be98-a7c4-4b1a-bd3b-f8bfe17adbc4" />
 
 ## Downlaod from GitHub
 Check first:  
