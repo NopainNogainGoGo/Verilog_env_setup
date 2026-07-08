@@ -14,7 +14,8 @@
 ```
 
 ## Downlaod from GitHub
-Check first: git --version  
+Check first:  
+git --version  
 git clone https://github.com/thename.git
 
 ## Upload to GitHub
