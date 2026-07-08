@@ -1,7 +1,6 @@
 # Verilog Project Template 
-
-這是一個用於數位邏輯與 IC 設計的 Verilog 專案基礎模板（Template）。
-內建標準的資料夾架構、自動化編譯與模擬的 `Makefile`，以及快速提交至 GitHub 的自動化腳本，適合用於快速啟動新的硬體描述語言專案。
+用於 IC 設計的 Verilog Template  
+資料夾架構、自動化編譯與模擬的 `Makefile`，以及快速提交至 GitHub 的自動化腳本，用於新的專案。
 
 ## 📂 Directory Structure
 
