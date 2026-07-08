@@ -11,3 +11,15 @@
 ├── tb/                 # 存放所有 Testbench 測試檔 (e.g., tb_top.v)
 ├── Makefile            # 自動化編譯與模擬腳本 (vcs)
 |── github_upload.sh    # Git 自動上傳到 github 用 git 管理
+
+## Downlaod from GitHub
+Check first: git --version
+git clone https://github.com/Shawn531/VLSI-System-Design.git
+
+## Upload to GitHub
+use github_upload.sh 
+
+## Run Simulation
+use Makefile
+
+
