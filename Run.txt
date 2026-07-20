@@ -1,0 +1,18 @@
+# pre-sim
+vcs -R tb.v CORDIC.v -full64 -debug_acc+all +v2k | tee test.log
+
+vcs testbench.v GPSDC.v -full64 -kdb -debug_access+all -y /cad/synopsys/synthesis/2022.12/dw/sim_ver +libext+.v +incdir+/cad/synopsys/synthesis/2022.12/dw/sim_ver +incdir+/cad/synopsys/synthesis/2022.12/dw/syn_ver
+./simv
+
+# synthesis
+dc_shell> set_host_options -max_cores 8
+dc_shell> report_host_options
+
+# Wave view
+nWave &
+
+# synthesis
+dc_shell -f dc_syn.tcl
+
+# GLS
+vcs -R tb.v CORDIC_syn.v -v "/cad/CBDK/CBDK_IC_Contest_v2.5/Verilog/tsmc13_neg.v" -full64 -debug_access+all +v2k +define+SDF +notimingcheck
