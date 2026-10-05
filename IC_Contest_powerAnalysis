@@ -1,0 +1,82 @@
+# ============================================================
+# File Settings - 只需要修改這裡
+# ============================================================
+
+# ------------------------------------------------------------
+# Design
+# ------------------------------------------------------------
+set DESIGN_NAME "LBP"
+
+# Synthesized design
+set DDC_FILE "LBP_syn.ddc"
+
+# SAIF generated from GLS VCD
+set SAIF_FILE "LBP_syn.saif"
+
+# Testbench -> DUT hierarchy
+# Hierarchical instance name see testfixture.v
+set INSTANCE_NAME "testfixture/LBP"
+
+# Power report
+set POWER_REPORT "power.rpt"
+
+# Switching activity report
+set SWITCHING_REPORT "switching_activity.rpt"
+
+# Operating condition
+set OPERATING_CONDITION "fast"
+
+
+# ============================================================
+# Power Analysis
+# ============================================================
+
+# ------------------------------------------------------------
+# Check required files
+# ------------------------------------------------------------
+if {![file exists $DDC_FILE]} {
+    echo "ERROR: DDC file not found: $DDC_FILE"
+    exit 1
+}
+
+if {![file exists $SAIF_FILE]} {
+    echo "ERROR: SAIF file not found: $SAIF_FILE"
+    exit 1
+}
+
+# ------------------------------------------------------------
+# Read synthesized design
+# ------------------------------------------------------------
+read_ddc $DDC_FILE
+
+# ------------------------------------------------------------
+# Set current design
+# ------------------------------------------------------------
+current_design $DESIGN_NAME
+
+# ------------------------------------------------------------
+# Link design
+# ------------------------------------------------------------
+link
+
+# ------------------------------------------------------------
+# Read switching activity from SAIF
+# ------------------------------------------------------------
+read_saif \
+    -input $SAIF_FILE \
+    -instance_name $INSTANCE_NAME
+
+# ------------------------------------------------------------
+# Set operating condition
+# ------------------------------------------------------------
+set_operating_conditions $OPERATING_CONDITION
+
+# ------------------------------------------------------------
+# Report power
+# ------------------------------------------------------------
+report_power > $POWER_REPORT
+
+# ------------------------------------------------------------
+# Exit
+# ------------------------------------------------------------
+exit
