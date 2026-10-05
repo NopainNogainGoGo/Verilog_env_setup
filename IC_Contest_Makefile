@@ -1,0 +1,52 @@
+# ============================================================
+# File Settings - 只需要修改這裡
+# ============================================================
+
+# RTL Simulation
+RTL_TB      = testfixture.v
+RTL_DESIGN  = LBP.sv
+
+# DC Synthesis
+DC_SCRIPT   = DC_syn.tcl
+
+# Post-Synthesis with SDF Simulation
+SDF_TB      = testfixture.v
+SDF_NETLIST = LBP_syn.sv
+SDF_LIB     = /usr/cad/CBDK_IC_Contest_v2.5/Verilog/tsmc13_neg.v
+
+# ============================================================
+# VCS 
+# ============================================================
+
+VCS_OPTION = -sverilog -full64 -debug_access+all +v2k
+
+# ------------------------------------------------------------
+# 1. RTL Simulation
+# ------------------------------------------------------------
+rtl:
+	vcs -R $(RTL_TB) $(RTL_DESIGN) $(VCS_OPTION)
+
+# ------------------------------------------------------------
+# 2. SpyGlass
+# ------------------------------------------------------------
+spyglass:
+	spyglass &
+
+# ------------------------------------------------------------
+# 3. Design Compiler Synthesis
+# ------------------------------------------------------------
+syn:
+	dc_shell -f $(DC_SCRIPT)
+
+# ------------------------------------------------------------
+# 4. Post-Synthesis with SDF Simulation
+# ------------------------------------------------------------
+sdf:
+	vcs -R $(SDF_TB) $(SDF_NETLIST) -v $(SDF_LIB) $(VCS_OPTION) +define+SDF +notimingcheck
+
+# ------------------------------------------------------------
+# Clean
+# ------------------------------------------------------------
+clean:
+	rm -rf simv simv.daidir csrc ucli.key DVEfiles
+	rm -rf *.log *.fsdb *.vpd
