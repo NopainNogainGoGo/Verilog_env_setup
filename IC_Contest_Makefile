@@ -21,7 +21,7 @@ SDF_LIB     = /usr/cad/CBDK_IC_Contest_v2.5/Verilog/tsmc13_neg.v
 VCS_OPTION = -sverilog -full64 -debug_access+all +v2k
 
 # ------------------------------------------------------------
-# 1. RTL Simulation
+# 1. RTL Simulation (nwave&)
 # ------------------------------------------------------------
 rtl:
 	vcs -R $(RTL_TB) $(RTL_DESIGN) $(VCS_OPTION)
@@ -39,10 +39,11 @@ syn:
 	dc_shell -f $(DC_SCRIPT)
 
 # ------------------------------------------------------------
-# 4. Post-Synthesis with SDF Simulation
+# 4. Gate-sim with SDF Simulation (GLS)
+#    +notimingcheck   確認 synthesis 後邏輯功能正確。
 # ------------------------------------------------------------
 sdf:
-	vcs -R $(SDF_TB) $(SDF_NETLIST) -v $(SDF_LIB) $(VCS_OPTION) +define+SDF +notimingcheck
+	vcs -R $(SDF_TB) $(SDF_NETLIST) -v $(SDF_LIB) $(VCS_OPTION) +define+SDF+notimingcheck
 
 # ------------------------------------------------------------
 # Clean
